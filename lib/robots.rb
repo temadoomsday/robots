@@ -118,7 +118,7 @@ class Robots
   end
 
   def robots_content(uri)
-    return @custom_robots_txt if @custom_robots_txt
+    return StringIO.new(@custom_robots_txt) if @custom_robots_txt
 
     io = Robots.get_robots_txt(uri, @user_agent)
     io = StringIO.new(Robots::DEFAULT_ROBOTS) if !io || io.content_type != 'text/plain' || io.status != %w[200 OK]
